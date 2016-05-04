@@ -77,6 +77,44 @@
             </objects>
             <point key="canvasLocation" x="1857" y="928"/>
         </scene>
+        <!--Shopping View Controller-->
+        <scene sceneID="GGO-3U-hgl">
+            <objects>
+                <viewController storyboardIdentifier="ShoppingViewController" automaticallyAdjustsScrollViewInsets="NO" id="qvf-56-wj4" customClass="ShoppingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fbB-hF-khd"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Og-bg-ZPN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Sk-Hz-Sjg">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WSo-Zl-KlU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="qvf-56-wj4" id="Hnu-QQ-gvW"/>
+                                    <outlet property="delegate" destination="qvf-56-wj4" id="0mP-Ok-3Fi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WSo-Zl-KlU" firstAttribute="top" secondItem="fbB-hF-khd" secondAttribute="bottom" id="87g-6h-P6d"/>
+                            <constraint firstItem="2Og-bg-ZPN" firstAttribute="top" secondItem="WSo-Zl-KlU" secondAttribute="bottom" id="GUE-vv-pzy"/>
+                            <constraint firstItem="WSo-Zl-KlU" firstAttribute="leading" secondItem="1Sk-Hz-Sjg" secondAttribute="leading" id="q4g-zQ-aVf"/>
+                            <constraint firstAttribute="trailing" secondItem="WSo-Zl-KlU" secondAttribute="trailing" id="rt3-XC-MMD"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="WSo-Zl-KlU" id="VWE-Au-EAg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dCG-J7-GZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2538" y="928"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Et-ZX-2vW">
             <objects>

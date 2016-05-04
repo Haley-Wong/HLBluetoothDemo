@@ -21,6 +21,9 @@
 		B964B2371CD35E62004BE213 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B964B2301CD35E62004BE213 /* SVProgressHUD.bundle */; };
 		B964B2381CD35E62004BE213 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B2321CD35E62004BE213 /* SVProgressHUD.m */; };
 		B964B2391CD35E62004BE213 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B2341CD35E62004BE213 /* SVRadialGradientLayer.m */; };
+		B9768BAB1CD848630008C8F3 /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */; };
+		B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */; };
+		B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BBA1CD873820008C8F3 /* HLPrinter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,12 @@
 		B964B2321CD35E62004BE213 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B964B2331CD35E62004BE213 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		B964B2341CD35E62004BE213 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		B9768BA91CD848630008C8F3 /* ShoppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingViewController.h; sourceTree = "<group>"; };
+		B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
+		B9768BB61CD8724A0008C8F3 /* UIImage+Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bitmap.h"; sourceTree = "<group>"; };
+		B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bitmap.m"; sourceTree = "<group>"; };
+		B9768BB91CD873820008C8F3 /* HLPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLPrinter.h; sourceTree = "<group>"; };
+		B9768BBA1CD873820008C8F3 /* HLPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLPrinter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,12 +95,15 @@
 			children = (
 				B964B22A1CD35E62004BE213 /* SVProgressHUD */,
 				B905F8981CD0B2DB003D26CB /* HLBluetooth */,
+				B9768BB51CD8723E0008C8F3 /* HLPrinter */,
 				B905F8841CD0B2C0003D26CB /* AppDelegate.h */,
 				B905F8851CD0B2C0003D26CB /* AppDelegate.m */,
 				B905F8871CD0B2C0003D26CB /* ViewController.h */,
 				B905F8881CD0B2C0003D26CB /* ViewController.m */,
 				B964B2221CD35712004BE213 /* BLEDetailViewController.h */,
 				B964B2231CD35712004BE213 /* BLEDetailViewController.m */,
+				B9768BA91CD848630008C8F3 /* ShoppingViewController.h */,
+				B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */,
 				B905F88A1CD0B2C0003D26CB /* Main.storyboard */,
 				B905F88D1CD0B2C0003D26CB /* Assets.xcassets */,
 				B905F88F1CD0B2C0003D26CB /* LaunchScreen.storyboard */,
@@ -134,6 +146,17 @@
 				B964B2341CD35E62004BE213 /* SVRadialGradientLayer.m */,
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		B9768BB51CD8723E0008C8F3 /* HLPrinter */ = {
+			isa = PBXGroup;
+			children = (
+				B9768BB61CD8724A0008C8F3 /* UIImage+Bitmap.h */,
+				B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */,
+				B9768BB91CD873820008C8F3 /* HLPrinter.h */,
+				B9768BBA1CD873820008C8F3 /* HLPrinter.m */,
+			);
+			path = HLPrinter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,10 +230,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9768BAB1CD848630008C8F3 /* ShoppingViewController.m in Sources */,
 				B905F8891CD0B2C0003D26CB /* ViewController.m in Sources */,
 				B905F8861CD0B2C0003D26CB /* AppDelegate.m in Sources */,
+				B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */,
 				B905F8831CD0B2C0003D26CB /* main.m in Sources */,
 				B905F89B1CD0B325003D26CB /* HLBLEManager.m in Sources */,
+				B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */,
 				B964B2381CD35E62004BE213 /* SVProgressHUD.m in Sources */,
 				B964B2351CD35E62004BE213 /* SVIndefiniteAnimatedView.m in Sources */,
 				B964B2241CD35712004BE213 /* BLEDetailViewController.m in Sources */,

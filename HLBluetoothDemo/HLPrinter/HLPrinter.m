@@ -37,7 +37,6 @@
     // 另一种设置行间距的方法看这个 @link{-setLineSpace:}
     Byte lineSpace[] = {0x1B,0x32};
     [_printerData appendBytes:lineSpace length:sizeof(lineSpace)];
-
     // 3.设置字体:标准0x00，压缩0x01;
     Byte fontBytes[] = {0x1B,0x4D,0x00};
     [_printerData appendBytes:fontBytes length:sizeof(fontBytes)];

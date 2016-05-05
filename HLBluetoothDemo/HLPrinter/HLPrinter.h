@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
  *  @param title    名称
  *  @param value    实际值
  *  @param fontSize 字号大小
- *  警告:因字号和字体与iOS中字体不一致，计算出来有误差
+ *  警告:因字号和字体与iOS中字体不一致，计算出来有误差,所以建议用在价格方面
  */
 - (void)appendTitle:(NSString *)title value:(NSString *)value fontSize:(HLFontSize)fontSize;
 

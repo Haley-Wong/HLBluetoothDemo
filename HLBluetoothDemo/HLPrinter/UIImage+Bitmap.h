@@ -66,7 +66,14 @@ typedef NS_ENUM(NSInteger,BitPixels) {
  */
 + (UIImage *)qrCodeImageWithInfo:(NSString *)info centerImage:(UIImage *)image  width:(CGFloat)width;
 
-
+/**
+ *  将CIImage 放大显示，并转换为UIImage。
+ *
+ *  @param image 原始CIImage
+ *  @param size  最终尺寸的宽度
+ *
+ *  @return UIImage
+ */
 + (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat)size;
 
 @end

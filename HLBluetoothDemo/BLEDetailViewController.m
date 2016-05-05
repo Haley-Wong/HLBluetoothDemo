@@ -48,8 +48,8 @@
     shoppingVC.printBlock = ^(NSArray *goodsArray) {
         NSLog(@"goodsArray:%@",goodsArray);
         
-        NSString *title = @"尚龙电商";
-        NSString *str1 = @"尚龙服务中心(销售单)";
+        NSString *title = @"测试电商";
+        NSString *str1 = @"测试电商服务中心(销售单)";
         
         HLPrinter *printer = [[HLPrinter alloc] init];
         [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
@@ -59,7 +59,7 @@
         
         [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
         [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-        [printer appendText:@"地址:深圳市南山区学府路东科技园店" alignment:HLTextAlignmentLeft];
+        [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
         
         [printer appendSeperatorLine];
         [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
@@ -77,6 +77,8 @@
         [printer appendTitle:@"找零:" value:leftStr];
         
         [printer appendFooter:nil];
+        
+        [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
         
         NSData *mainData = [printer getFinalData];
         

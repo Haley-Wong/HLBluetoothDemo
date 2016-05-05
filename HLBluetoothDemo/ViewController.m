@@ -31,12 +31,21 @@
     _tableView.rowHeight = 60;
     
     HLBLEManager *manager = [HLBLEManager sharedInstance];
+    __weak HLBLEManager *weakManager = manager;
     manager.stateUpdateBlock = ^(CBCentralManager *central) {
         NSString *info = nil;
         switch (central.state) {
             case CBCentralManagerStatePoweredOn:
                 info = @"蓝牙已打开，并且可用";
-                [central scanForPeripheralsWithServices:nil options:nil];
+                //三种种方式
+                // 方式1
+                [weakManager scanForPeripheralsWithServiceUUIDs:nil options:nil];
+//                // 方式2
+//                [central scanForPeripheralsWithServices:nil options:nil];
+//                // 方式3
+//                [weakManager scanForPeripheralsWithServiceUUIDs:nil options:nil didDiscoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
+//                    
+//                }];
                 break;
             case CBCentralManagerStatePoweredOff:
                 info = @"蓝牙可用，未打开";

@@ -15,6 +15,10 @@
 		B905F8911CD0B2C0003D26CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B905F88F1CD0B2C0003D26CB /* LaunchScreen.storyboard */; };
 		B905F89B1CD0B325003D26CB /* HLBLEManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B905F89A1CD0B325003D26CB /* HLBLEManager.m */; };
 		B905F89D1CD0B998003D26CB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B905F89C1CD0B998003D26CB /* CoreBluetooth.framework */; };
+		B9499D281CDAE3A000542039 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D241CDAE3A000542039 /* 1.png */; };
+		B9499D291CDAE3A000542039 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D251CDAE3A000542039 /* 2.png */; };
+		B9499D2A1CDAE3A000542039 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D261CDAE3A000542039 /* 3.png */; };
+		B9499D2B1CDAE3A000542039 /* printer.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D271CDAE3A000542039 /* printer.png */; };
 		B964B2241CD35712004BE213 /* BLEDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B2231CD35712004BE213 /* BLEDetailViewController.m */; };
 		B964B2351CD35E62004BE213 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B22C1CD35E62004BE213 /* SVIndefiniteAnimatedView.m */; };
 		B964B2361CD35E62004BE213 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B22E1CD35E62004BE213 /* SVProgressAnimatedView.m */; };
@@ -24,6 +28,7 @@
 		B9768BAB1CD848630008C8F3 /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */; };
 		B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */; };
 		B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BBA1CD873820008C8F3 /* HLPrinter.m */; };
+		B976F85E1CD9F0E900157A87 /* ico180.png in Resources */ = {isa = PBXBuildFile; fileRef = B976F85D1CD9F0E900157A87 /* ico180.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,10 @@
 		B905F8991CD0B325003D26CB /* HLBLEManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLBLEManager.h; sourceTree = "<group>"; };
 		B905F89A1CD0B325003D26CB /* HLBLEManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLBLEManager.m; sourceTree = "<group>"; };
 		B905F89C1CD0B998003D26CB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		B9499D241CDAE3A000542039 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		B9499D251CDAE3A000542039 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		B9499D261CDAE3A000542039 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		B9499D271CDAE3A000542039 /* printer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printer.png; sourceTree = "<group>"; };
 		B964B2201CD2FC06004BE213 /* HLBLEConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLBLEConst.h; sourceTree = "<group>"; };
 		B964B2221CD35712004BE213 /* BLEDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDetailViewController.h; sourceTree = "<group>"; };
 		B964B2231CD35712004BE213 /* BLEDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDetailViewController.m; sourceTree = "<group>"; };
@@ -59,6 +68,7 @@
 		B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bitmap.m"; sourceTree = "<group>"; };
 		B9768BB91CD873820008C8F3 /* HLPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLPrinter.h; sourceTree = "<group>"; };
 		B9768BBA1CD873820008C8F3 /* HLPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLPrinter.m; sourceTree = "<group>"; };
+		B976F85D1CD9F0E900157A87 /* ico180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico180.png; path = ../ico180.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,7 @@
 				B905F8851CD0B2C0003D26CB /* AppDelegate.m */,
 				B905F8871CD0B2C0003D26CB /* ViewController.h */,
 				B905F8881CD0B2C0003D26CB /* ViewController.m */,
+				B9499D231CDAE3A000542039 /* images */,
 				B964B2221CD35712004BE213 /* BLEDetailViewController.h */,
 				B964B2231CD35712004BE213 /* BLEDetailViewController.m */,
 				B9768BA91CD848630008C8F3 /* ShoppingViewController.h */,
@@ -129,6 +140,18 @@
 				B964B2201CD2FC06004BE213 /* HLBLEConst.h */,
 			);
 			path = HLBluetooth;
+			sourceTree = "<group>";
+		};
+		B9499D231CDAE3A000542039 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				B976F85D1CD9F0E900157A87 /* ico180.png */,
+				B9499D241CDAE3A000542039 /* 1.png */,
+				B9499D251CDAE3A000542039 /* 2.png */,
+				B9499D261CDAE3A000542039 /* 3.png */,
+				B9499D271CDAE3A000542039 /* printer.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		B964B22A1CD35E62004BE213 /* SVProgressHUD */ = {
@@ -218,8 +241,13 @@
 			files = (
 				B905F8911CD0B2C0003D26CB /* LaunchScreen.storyboard in Resources */,
 				B905F88E1CD0B2C0003D26CB /* Assets.xcassets in Resources */,
+				B9499D291CDAE3A000542039 /* 2.png in Resources */,
+				B9499D2A1CDAE3A000542039 /* 3.png in Resources */,
 				B905F88C1CD0B2C0003D26CB /* Main.storyboard in Resources */,
+				B9499D281CDAE3A000542039 /* 1.png in Resources */,
 				B964B2371CD35E62004BE213 /* SVProgressHUD.bundle in Resources */,
+				B9499D2B1CDAE3A000542039 /* printer.png in Resources */,
+				B976F85E1CD9F0E900157A87 /* ico180.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

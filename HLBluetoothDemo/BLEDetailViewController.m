@@ -45,40 +45,7 @@
 - (void)goToShopping
 {
     ShoppingViewController *shoppingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingViewController"];
-    shoppingVC.printBlock = ^(NSArray *goodsArray) {
-        NSLog(@"goodsArray:%@",goodsArray);
-        
-        NSString *title = @"测试电商";
-        NSString *str1 = @"测试电商服务中心(销售单)";
-        
-        HLPrinter *printer = [[HLPrinter alloc] init];
-        [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
-        [printer appendText:str1 alignment:HLTextAlignmentCenter];
-        [printer appendBarCodeWithInfo:@"RN3456789012"];
-        [printer appendSeperatorLine];
-        
-        [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-        [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-        [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
-        
-        [printer appendSeperatorLine];
-        [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
-        CGFloat total = 0.0;
-        for (NSDictionary *dict in goodsArray) {
-            [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
-            total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
-        }
-        
-        [printer appendSeperatorLine];
-        NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
-        [printer appendTitle:@"总计:" value:totalStr];
-        [printer appendTitle:@"实收:" value:@"100.00"];
-        NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
-        [printer appendTitle:@"找零:" value:leftStr];
-        
-        [printer appendFooter:nil];
-        
-        [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    shoppingVC.printBlock = ^(HLPrinter *printer) {
         
         NSData *mainData = [printer getFinalData];
         

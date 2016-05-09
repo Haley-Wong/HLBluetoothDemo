@@ -41,6 +41,13 @@ typedef NS_ENUM(NSInteger,BitPixels) {
  */
 - (UIImage *)imageWithscaleMaxWidth:(CGFloat)maxWidth;
 
+/**
+ *  将图片转换为黑白图片
+ *
+ *  @return 黑白图片
+ */
+- (UIImage *)blackAndWhiteImage;
+
 @end
 
 #pragma mark - -----------制作二维码 条形码------------

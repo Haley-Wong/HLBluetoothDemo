@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^PrintBlock)(NSArray *goodsArray);
+#import "HLPrinter.h"
+
+typedef void(^PrintBlock)(HLPrinter *printer);
 
 @interface ShoppingViewController : UIViewController
 

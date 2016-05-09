@@ -29,6 +29,7 @@
 		B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */; };
 		B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BBA1CD873820008C8F3 /* HLPrinter.m */; };
 		B976F85E1CD9F0E900157A87 /* ico180.png in Resources */ = {isa = PBXBuildFile; fileRef = B976F85D1CD9F0E900157A87 /* ico180.png */; };
+		B98F219B1CE032AF00E017D4 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98F219A1CE032AF00E017D4 /* PreviewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,8 @@
 		B9768BB91CD873820008C8F3 /* HLPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLPrinter.h; sourceTree = "<group>"; };
 		B9768BBA1CD873820008C8F3 /* HLPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLPrinter.m; sourceTree = "<group>"; };
 		B976F85D1CD9F0E900157A87 /* ico180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico180.png; path = ../ico180.png; sourceTree = "<group>"; };
+		B98F21991CE032AF00E017D4 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
+		B98F219A1CE032AF00E017D4 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				B964B2231CD35712004BE213 /* BLEDetailViewController.m */,
 				B9768BA91CD848630008C8F3 /* ShoppingViewController.h */,
 				B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */,
+				B98F21991CE032AF00E017D4 /* PreviewViewController.h */,
+				B98F219A1CE032AF00E017D4 /* PreviewViewController.m */,
 				B905F88A1CD0B2C0003D26CB /* Main.storyboard */,
 				B905F88D1CD0B2C0003D26CB /* Assets.xcassets */,
 				B905F88F1CD0B2C0003D26CB /* LaunchScreen.storyboard */,
@@ -259,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9768BAB1CD848630008C8F3 /* ShoppingViewController.m in Sources */,
+				B98F219B1CE032AF00E017D4 /* PreviewViewController.m in Sources */,
 				B905F8891CD0B2C0003D26CB /* ViewController.m in Sources */,
 				B905F8861CD0B2C0003D26CB /* AppDelegate.m in Sources */,
 				B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */,

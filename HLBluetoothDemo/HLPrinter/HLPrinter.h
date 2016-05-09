@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "UIImage+Bitmap.h"  
+#import "UIImage+Bitmap.h"
 
 typedef NS_ENUM(NSInteger, HLPrinterStyle) {
     HLPrinterStyleDefault,
@@ -31,6 +31,15 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 };
 
 @interface HLPrinter : NSObject
+
+/**
+ *  构造器
+ *
+ *  @param showPreview 是否需要一个预览视图，预览视图通过@link{-getPreviewView}获取
+ *
+ *  @return
+ */
+- (instancetype)initWithShowPreview:(BOOL)showPreview;
 
 /**
  *  添加单行标题,默认字号是小号字体
@@ -68,6 +77,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  设置单行信息，左标题，右实际值
+ *  @提醒 该方法的预览效果与实际效果误差较大，请以实际打印小票为准
  *
  *  @param title    标题
  *  @param value    实际值
@@ -77,6 +87,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  设置单行信息，左标题，右实际值
+ *  @提醒 该方法的预览效果与实际效果误差较大，请以实际打印小票为准
  *
  *  @param title    标题
  *  @param value    实际值
@@ -154,6 +165,8 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
  *  @return 最终的data
  */
 - (NSData *)getFinalData;
+
+- (UIView *)getPreviewView;
 
 
 @end

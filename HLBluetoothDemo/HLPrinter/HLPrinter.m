@@ -8,10 +8,20 @@
 
 #import "HLPrinter.h"
 
+#define kHLMargin 20
+#define kHLPadding 2
+#define kHLPreviewWidth 320
+
 @interface HLPrinter ()
 
 /** 将要打印的排版后的数据 */
 @property (strong, nonatomic)   NSMutableData            *printerData;
+
+
+/** 预览视图 */
+@property (strong, nonatomic)   UIView            *previewView;
+/** 预览视图高度 */
+@property (assign, nonatomic)   CGFloat             height;
 
 @end
 
@@ -26,9 +36,26 @@
     return self;
 }
 
+- (instancetype)initWithShowPreview:(BOOL)showPreview
+{
+    self = [super init];
+    if (self) {
+        if (showPreview) {
+            _previewView = [[UIView alloc] init];
+            _previewView.frame = CGRectMake(0, 0, kHLPreviewWidth, 0);
+            _previewView.backgroundColor = [UIColor whiteColor];
+        }
+        
+        [self defaultSetting];
+    }
+    return self;
+}
+
 - (void)defaultSetting
 {
     _printerData = [[NSMutableData alloc] init];
+    
+    _height += kHLPadding;
     
     // 1.初始化打印机
     Byte initBytes[] = {0x1B,0x40};
@@ -40,7 +67,7 @@
     // 3.设置字体:标准0x00，压缩0x01;
     Byte fontBytes[] = {0x1B,0x4D,0x00};
     [_printerData appendBytes:fontBytes length:sizeof(fontBytes)];
-
+    
 }
 
 #pragma mark - -------------基本操作----------------
@@ -160,6 +187,34 @@
     if (fontSize != HLFontSizeTitleSmalle) {
         [self appendNewLine];
     }
+    
+    //-------------预览视图------------------
+    if (!_previewView) {
+        return;
+    }
+    UILabel *textLabel = [[UILabel alloc] init];
+    textLabel.numberOfLines = 0;
+    textLabel.text = text;
+    CGFloat offsetY = kHLPadding;
+    if (fontSize == HLFontSizeTitleMiddle) {
+        textLabel.font = [UIFont systemFontOfSize:30];
+        offsetY = kHLPadding * 2;
+    } else if (fontSize == HLFontSizeTitleBig) {
+        textLabel.font = [UIFont systemFontOfSize:48];
+        offsetY = kHLPadding * 2;
+    }
+    CGSize size = [textLabel sizeThatFits:CGSizeMake(kHLPreviewWidth - kHLMargin *2, CGFLOAT_MAX)];
+    textLabel.frame = CGRectMake(kHLMargin, _height, kHLPreviewWidth - kHLMargin *2, size.height);
+    _height += (offsetY + size.height);
+    if (alignment == HLTextAlignmentLeft) {
+        textLabel.textAlignment = NSTextAlignmentLeft;
+    } else if (alignment == HLTextAlignmentCenter) {
+        textLabel.textAlignment = NSTextAlignmentCenter;
+    } else {
+        textLabel.textAlignment = NSTextAlignmentRight;
+    }
+    
+    [_previewView addSubview:textLabel];
 }
 
 - (void)appendTitle:(NSString *)title value:(NSString *)value
@@ -182,6 +237,40 @@
     if (fontSize != HLFontSizeTitleSmalle) {
         [self appendNewLine];
     }
+    
+    //-------------预览视图------------------
+    if (!_previewView) {
+        return;
+    }
+    UILabel *textLabel = [[UILabel alloc] init];
+    UILabel *valueLabel = [[UILabel alloc] init];
+    textLabel.numberOfLines = 0;
+    valueLabel.numberOfLines = 0;
+    textLabel.text = title;
+    valueLabel.text = value;
+    CGFloat offsetY = kHLPadding;
+    if (fontSize == HLFontSizeTitleMiddle) {
+        textLabel.font = [UIFont systemFontOfSize:30];
+        valueLabel.font = [UIFont systemFontOfSize:30];
+        offsetY = kHLPadding * 2;
+    } else if (fontSize == HLFontSizeTitleBig) {
+        textLabel.font = [UIFont systemFontOfSize:48];
+        valueLabel.font = [UIFont systemFontOfSize:48];
+        offsetY = kHLPadding * 2;
+    }
+    CGSize size = [textLabel sizeThatFits:CGSizeMake(kHLPreviewWidth - kHLMargin *2, CGFLOAT_MAX)];
+    textLabel.frame = CGRectMake(kHLMargin, _height, kHLPreviewWidth - kHLMargin *2, size.height);
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    
+    CGSize valueSize = [valueLabel sizeThatFits:CGSizeMake(kHLPreviewWidth - kHLMargin *2, CGFLOAT_MAX)];
+    valueLabel.frame = CGRectMake(kHLMargin, _height, kHLPreviewWidth - kHLMargin *2, valueSize.height);
+    
+    _height += (offsetY + size.height > valueSize.height ? size.height:valueSize.height);
+    valueLabel.textAlignment = NSTextAlignmentRight;
+    
+    [_previewView addSubview:textLabel];
+    
+    [_previewView addSubview:valueLabel];
 }
 
 - (void)appendTitle:(NSString *)title value:(NSString *)value valueOffset:(NSInteger)offset
@@ -206,6 +295,40 @@
     if (fontSize != HLFontSizeTitleSmalle) {
         [self appendNewLine];
     }
+    
+    //-------------预览视图------------------
+    if (!_previewView) {
+        return;
+    }
+    UILabel *textLabel = [[UILabel alloc] init];
+    UILabel *valueLabel = [[UILabel alloc] init];
+    textLabel.numberOfLines = 0;
+    valueLabel.numberOfLines = 0;
+    textLabel.text = title;
+    valueLabel.text = value;
+    CGFloat offsetY = kHLPadding;
+    if (fontSize == HLFontSizeTitleMiddle) {
+        textLabel.font = [UIFont systemFontOfSize:30];
+        valueLabel.font = [UIFont systemFontOfSize:30];
+        offsetY = kHLPadding * 2;
+    } else if (fontSize == HLFontSizeTitleBig) {
+        textLabel.font = [UIFont systemFontOfSize:48];
+        valueLabel.font = [UIFont systemFontOfSize:48];
+        offsetY = kHLPadding * 2;
+    }
+    CGSize size = [textLabel sizeThatFits:CGSizeMake(kHLPreviewWidth - kHLMargin *2, CGFLOAT_MAX)];
+    textLabel.frame = CGRectMake(kHLMargin, _height, kHLPreviewWidth - kHLMargin *2, size.height);
+    textLabel.textAlignment = NSTextAlignmentLeft;
+    
+    CGSize valueSize = [valueLabel sizeThatFits:CGSizeMake(kHLPreviewWidth - kHLMargin *2, CGFLOAT_MAX)];
+    valueLabel.frame = CGRectMake(kHLMargin, _height, kHLPreviewWidth - kHLMargin *2, valueSize.height);
+    
+    _height += (offsetY + MAX(size.height, valueSize.height));
+    valueLabel.textAlignment = NSTextAlignmentRight;
+    
+    [_previewView addSubview:textLabel];
+    
+    [_previewView addSubview:valueLabel];
 }
 
 - (void)appendLeftText:(NSString *)left middleText:(NSString *)middle rightText:(NSString *)right isTitle:(BOOL)isTitle
@@ -232,6 +355,41 @@
     }
     
     [self appendNewLine];
+    
+    //-------------预览视图------------------
+    if (!_previewView) {
+        return;
+    }
+    CGFloat labelWidth = (kHLPreviewWidth - kHLMargin *2) / 3;
+    UILabel *textLabel = [[UILabel alloc] init];
+    textLabel.numberOfLines = 0;
+    textLabel.text = left;
+    CGFloat offsetY = kHLPadding;
+    CGSize size = [textLabel sizeThatFits:CGSizeMake(labelWidth, CGFLOAT_MAX)];
+    textLabel.frame = CGRectMake(kHLMargin, _height, labelWidth, size.height);
+    
+    [_previewView addSubview:textLabel];
+    
+    UILabel *middleLabel = [[UILabel alloc] init];
+    middleLabel.textAlignment = NSTextAlignmentCenter;
+    middleLabel.numberOfLines = 0;
+    middleLabel.text = middle;
+    CGSize middleSize = [middleLabel sizeThatFits:CGSizeMake(labelWidth, CGFLOAT_MAX)];
+    middleLabel.frame = CGRectMake(kHLMargin + labelWidth, _height, labelWidth, middleSize.height);
+    [_previewView addSubview:middleLabel];
+    
+    
+    UILabel *rightLabel = [[UILabel alloc] init];
+    rightLabel.textAlignment = NSTextAlignmentRight;
+    rightLabel.numberOfLines = 0;
+    rightLabel.text = right;
+    CGSize rightsize = [rightLabel sizeThatFits:CGSizeMake(labelWidth, CGFLOAT_MAX)];
+    rightLabel.frame = CGRectMake(kHLMargin + labelWidth * 2, _height, labelWidth, rightsize.height);
+    
+    CGFloat maxHeight = MAX(MAX(size.height,middleSize.height), rightsize.height);
+    [_previewView addSubview:rightLabel];
+    
+    _height += (offsetY + maxHeight);
 }
 
 #pragma mark 图片
@@ -246,6 +404,8 @@
     
     // 2.设置图片
     UIImage *newImage = [image imageWithscaleMaxWidth:maxWidth];
+    newImage = [newImage blackAndWhiteImage];
+    
     NSData *imageData = [newImage bitmapData];
     [_printerData appendData:imageData];
     
@@ -255,6 +415,20 @@
     // 4.打印图片后，恢复文字的行间距
     Byte lineSpace[] = {0x1B,0x32};
     [_printerData appendBytes:lineSpace length:sizeof(lineSpace)];
+    
+    //-------------预览视图------------------
+    if (!_previewView) {
+        return;
+    }
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:newImage];
+    imageView.backgroundColor = [UIColor redColor];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    CGFloat offsetY = kHLPadding;
+    CGFloat imageX = (kHLPreviewWidth - newImage.size.width * 0.7) * 0.5;
+    imageView.frame = CGRectMake(imageX, _height, newImage.size.width * 0.7, newImage.size.height * 0.7);
+    _height += (offsetY + newImage.size.height * 0.7);
+    
+    [_previewView addSubview:imageView];
 }
 
 - (void)appendBarCodeWithInfo:(NSString *)info
@@ -293,6 +467,20 @@
     [_printerData appendData:data];
     // 4.换行
     [self appendNewLine];
+    
+    //-------------预览视图------------------
+    if (!_previewView) {
+        return;
+    }
+    UILabel *textLabel = [[UILabel alloc] init];
+    textLabel.textAlignment = NSTextAlignmentCenter;
+    textLabel.text = @"- - - - - - - - - - - - - - - - - - - - - - ";;
+    CGFloat offsetY = kHLPadding;
+    CGSize size = [textLabel sizeThatFits:CGSizeMake(kHLPreviewWidth - kHLMargin *2, CGFLOAT_MAX)];
+    textLabel.frame = CGRectMake(kHLMargin, _height, kHLPreviewWidth - kHLMargin *2, size.height);
+    _height += (offsetY + size.height);
+    
+    [_previewView addSubview:textLabel];
 }
 
 - (void)appendFooter:(NSString *)footerInfo
@@ -307,6 +495,12 @@
 - (NSData *)getFinalData
 {
     return _printerData;
+}
+
+- (UIView *)getPreviewView
+{
+    _previewView.frame = CGRectMake(0, 0, kHLPreviewWidth, _height);
+    return _previewView;
 }
 
 @end

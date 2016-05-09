@@ -189,6 +189,19 @@
     return self;
 }
 
+- (UIImage *)blackAndWhiteImage
+{
+    CGSize size = self.size;
+    CIImage *beginImage = [CIImage imageWithCGImage:self.CGImage];
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorMonochrome"
+                                  keysAndValues:kCIInputImageKey,beginImage,kCIInputColorKey,[CIColor colorWithCGColor:[UIColor blackColor].CGColor],nil];
+    
+    CIImage *outputImage = [filter outputImage];
+    
+    UIImage *newImage = [UIImage createNonInterpolatedUIImageFormCIImage:outputImage withSize:size.width];
+    return newImage;
+}
+
 @end
 
 @implementation UIImage (QRCode)

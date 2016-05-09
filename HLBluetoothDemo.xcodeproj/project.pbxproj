@@ -30,6 +30,7 @@
 		B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BBA1CD873820008C8F3 /* HLPrinter.m */; };
 		B976F85E1CD9F0E900157A87 /* ico180.png in Resources */ = {isa = PBXBuildFile; fileRef = B976F85D1CD9F0E900157A87 /* ico180.png */; };
 		B98F219B1CE032AF00E017D4 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98F219A1CE032AF00E017D4 /* PreviewViewController.m */; };
+		B98F219D1CE04A9400E017D4 /* 04.png in Resources */ = {isa = PBXBuildFile; fileRef = B98F219C1CE04A9400E017D4 /* 04.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		B976F85D1CD9F0E900157A87 /* ico180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico180.png; path = ../ico180.png; sourceTree = "<group>"; };
 		B98F21991CE032AF00E017D4 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
 		B98F219A1CE032AF00E017D4 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
+		B98F219C1CE04A9400E017D4 /* 04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				B9499D241CDAE3A000542039 /* 1.png */,
 				B9499D251CDAE3A000542039 /* 2.png */,
 				B9499D261CDAE3A000542039 /* 3.png */,
+				B98F219C1CE04A9400E017D4 /* 04.png */,
 				B9499D271CDAE3A000542039 /* printer.png */,
 			);
 			path = images;
@@ -249,6 +252,7 @@
 				B9499D291CDAE3A000542039 /* 2.png in Resources */,
 				B9499D2A1CDAE3A000542039 /* 3.png in Resources */,
 				B905F88C1CD0B2C0003D26CB /* Main.storyboard in Resources */,
+				B98F219D1CE04A9400E017D4 /* 04.png in Resources */,
 				B9499D281CDAE3A000542039 /* 1.png in Resources */,
 				B964B2371CD35E62004BE213 /* SVProgressHUD.bundle in Resources */,
 				B9499D2B1CDAE3A000542039 /* printer.png in Resources */,

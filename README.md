@@ -31,10 +31,12 @@
 # HLPrinter介绍
 蓝牙打印机模板可以打印的格式有单行文字格式、左标题右参数格式、三列数据格式、分隔线、图片、二维码、条形码等。
 
+现添加了预览效果图，因为打印机的字号和字体与iOS的字号、字体有很大偏差，所以预览效果图与实际效果也有些偏差，出入不大，预览仅供参考。
+
 # 效果图
 
 ![1.png](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/1.png) ![2.png](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/2.png)
-![3.png](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/3.png)
+![03.png](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/03.png)
 ![04.png](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/04.png)
 ![printer.png](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/printer.png)
 

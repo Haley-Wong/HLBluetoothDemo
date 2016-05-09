@@ -23,12 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"购物车";
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"预览" style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
-    self.navigationItem.leftBarButtonItem = leftItem;
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(printAction)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.rightBarButtonItems = @[leftItem,rightItem];
     
     NSDictionary *dict1 = @{@"name":@"铅笔",@"amount":@"5",@"price":@"2.0"};
     NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};

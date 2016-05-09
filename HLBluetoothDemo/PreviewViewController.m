@@ -8,6 +8,8 @@
 
 #import "PreviewViewController.h"
 
+#import "SVProgressHUD.h"
+
 @interface PreviewViewController ()
 
 /**< 打印小票预览容器视图 */
@@ -23,6 +25,13 @@
     self.view.backgroundColor = [UIColor grayColor];
     
     self.title = @"预览";
+    
+    [self showTip];
+}
+
+- (void)showTip
+{
+    [SVProgressHUD showInfoWithStatus:@"因打印机字体与iOS字体宽度和所占距离有偏差，所以预览小票与实际效果也有一些误差，预览仅供参考"];
 }
 
 - (UIScrollView *)scrollView

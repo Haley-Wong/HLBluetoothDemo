@@ -17,7 +17,6 @@
 		B905F89D1CD0B998003D26CB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B905F89C1CD0B998003D26CB /* CoreBluetooth.framework */; };
 		B9499D281CDAE3A000542039 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D241CDAE3A000542039 /* 1.png */; };
 		B9499D291CDAE3A000542039 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D251CDAE3A000542039 /* 2.png */; };
-		B9499D2A1CDAE3A000542039 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D261CDAE3A000542039 /* 3.png */; };
 		B9499D2B1CDAE3A000542039 /* printer.png in Resources */ = {isa = PBXBuildFile; fileRef = B9499D271CDAE3A000542039 /* printer.png */; };
 		B964B2241CD35712004BE213 /* BLEDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B2231CD35712004BE213 /* BLEDetailViewController.m */; };
 		B964B2351CD35E62004BE213 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B22C1CD35E62004BE213 /* SVIndefiniteAnimatedView.m */; };
@@ -31,6 +30,7 @@
 		B976F85E1CD9F0E900157A87 /* ico180.png in Resources */ = {isa = PBXBuildFile; fileRef = B976F85D1CD9F0E900157A87 /* ico180.png */; };
 		B98F219B1CE032AF00E017D4 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98F219A1CE032AF00E017D4 /* PreviewViewController.m */; };
 		B98F219D1CE04A9400E017D4 /* 04.png in Resources */ = {isa = PBXBuildFile; fileRef = B98F219C1CE04A9400E017D4 /* 04.png */; };
+		B98F219F1CE04BDF00E017D4 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = B98F219E1CE04BDF00E017D4 /* 03.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +49,6 @@
 		B905F89C1CD0B998003D26CB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B9499D241CDAE3A000542039 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		B9499D251CDAE3A000542039 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		B9499D261CDAE3A000542039 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		B9499D271CDAE3A000542039 /* printer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printer.png; sourceTree = "<group>"; };
 		B964B2201CD2FC06004BE213 /* HLBLEConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLBLEConst.h; sourceTree = "<group>"; };
 		B964B2221CD35712004BE213 /* BLEDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDetailViewController.h; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		B98F21991CE032AF00E017D4 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
 		B98F219A1CE032AF00E017D4 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
 		B98F219C1CE04A9400E017D4 /* 04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04.png; sourceTree = "<group>"; };
+		B98F219E1CE04BDF00E017D4 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +155,7 @@
 				B976F85D1CD9F0E900157A87 /* ico180.png */,
 				B9499D241CDAE3A000542039 /* 1.png */,
 				B9499D251CDAE3A000542039 /* 2.png */,
-				B9499D261CDAE3A000542039 /* 3.png */,
+				B98F219E1CE04BDF00E017D4 /* 03.png */,
 				B98F219C1CE04A9400E017D4 /* 04.png */,
 				B9499D271CDAE3A000542039 /* printer.png */,
 			);
@@ -250,9 +250,9 @@
 				B905F8911CD0B2C0003D26CB /* LaunchScreen.storyboard in Resources */,
 				B905F88E1CD0B2C0003D26CB /* Assets.xcassets in Resources */,
 				B9499D291CDAE3A000542039 /* 2.png in Resources */,
-				B9499D2A1CDAE3A000542039 /* 3.png in Resources */,
 				B905F88C1CD0B2C0003D26CB /* Main.storyboard in Resources */,
 				B98F219D1CE04A9400E017D4 /* 04.png in Resources */,
+				B98F219F1CE04BDF00E017D4 /* 03.png in Resources */,
 				B9499D281CDAE3A000542039 /* 1.png in Resources */,
 				B964B2371CD35E62004BE213 /* SVProgressHUD.bundle in Resources */,
 				B9499D2B1CDAE3A000542039 /* printer.png in Resources */,

@@ -43,6 +43,32 @@
 # 使用方式
 关于详细的BLE使用方式和打印小票的功能，在[这里有篇文章详细说明](http://www.jianshu.com/p/90cc08d11b5a)
 
+# 附加
+附加一个将NSData转换为16进制字符串的方法，因为有人反馈说，同一型号的打印机，有的打印机出来乱码有的正常。
+可以在打印前将数据都转换成16进制，与打印机的指令集对比，查找是拼接NSData出错，还是打印机原因。
+也可以尝试自己拼接NSData测试打印情况。这里有篇关于蓝牙打印机指令的文章：[打印机指令](http://www.jianshu.com/p/2d624044a27b)
+```
+- (NSString *)hexStringFromData:(NSData *)printerData{
+    
+    Byte *bytes = (Byte *)[printerData bytes];
+    
+    NSString *hexStr = @"";
+    for(int i = 0; i < [printerData length]; i++) {
+        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
+        newHexStr = [newHexStr uppercaseString];
+        if([newHexStr length]==1) {
+            hexStr = [NSString stringWithFormat:@"%@ 0%@",hexStr,newHexStr];
+        } else  {
+            hexStr = [NSString stringWithFormat:@"%@ %@",hexStr,newHexStr];
+        }
+    }
+    
+    NSLog(@"%@",hexStr);
+    
+    return hexStr;
+}
+```
+
 demo中也有一个使用的例子<br>
 
 如有使用错误或者更好的建议，请issues我。

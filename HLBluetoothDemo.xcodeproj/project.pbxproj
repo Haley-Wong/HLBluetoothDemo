@@ -24,6 +24,9 @@
 		B964B2371CD35E62004BE213 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B964B2301CD35E62004BE213 /* SVProgressHUD.bundle */; };
 		B964B2381CD35E62004BE213 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B2321CD35E62004BE213 /* SVProgressHUD.m */; };
 		B964B2391CD35E62004BE213 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B964B2341CD35E62004BE213 /* SVRadialGradientLayer.m */; };
+		B966B3531CE580E700E03487 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = B966B3521CE580E700E03487 /* index.html */; };
+		B966B3581CE5A2F400E03487 /* UIWebView+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B966B3571CE5A2F400E03487 /* UIWebView+UIImage.m */; };
+		B966B35E1CE5ACEA00E03487 /* OrderWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = B966B35D1CE5ACEA00E03487 /* OrderWebController.m */; };
 		B9768BAB1CD848630008C8F3 /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */; };
 		B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */; };
 		B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9768BBA1CD873820008C8F3 /* HLPrinter.m */; };
@@ -63,6 +66,11 @@
 		B964B2321CD35E62004BE213 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B964B2331CD35E62004BE213 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		B964B2341CD35E62004BE213 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		B966B3521CE580E700E03487 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		B966B3561CE5A2F400E03487 /* UIWebView+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UIImage.h"; sourceTree = "<group>"; };
+		B966B3571CE5A2F400E03487 /* UIWebView+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UIImage.m"; sourceTree = "<group>"; };
+		B966B35C1CE5ACEA00E03487 /* OrderWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderWebController.h; sourceTree = "<group>"; };
+		B966B35D1CE5ACEA00E03487 /* OrderWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderWebController.m; sourceTree = "<group>"; };
 		B9768BA91CD848630008C8F3 /* ShoppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingViewController.h; sourceTree = "<group>"; };
 		B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
 		B9768BB61CD8724A0008C8F3 /* UIImage+Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bitmap.h"; sourceTree = "<group>"; };
@@ -118,6 +126,8 @@
 				B9499D231CDAE3A000542039 /* images */,
 				B964B2221CD35712004BE213 /* BLEDetailViewController.h */,
 				B964B2231CD35712004BE213 /* BLEDetailViewController.m */,
+				B966B35C1CE5ACEA00E03487 /* OrderWebController.h */,
+				B966B35D1CE5ACEA00E03487 /* OrderWebController.m */,
 				B9768BA91CD848630008C8F3 /* ShoppingViewController.h */,
 				B9768BAA1CD848630008C8F3 /* ShoppingViewController.m */,
 				B98F21991CE032AF00E017D4 /* PreviewViewController.h */,
@@ -126,6 +136,7 @@
 				B905F88D1CD0B2C0003D26CB /* Assets.xcassets */,
 				B905F88F1CD0B2C0003D26CB /* LaunchScreen.storyboard */,
 				B905F8921CD0B2C0003D26CB /* Info.plist */,
+				B966B3521CE580E700E03487 /* index.html */,
 				B905F8811CD0B2C0003D26CB /* Supporting Files */,
 			);
 			path = HLBluetoothDemo;
@@ -186,6 +197,8 @@
 				B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */,
 				B9768BB91CD873820008C8F3 /* HLPrinter.h */,
 				B9768BBA1CD873820008C8F3 /* HLPrinter.m */,
+				B966B3561CE5A2F400E03487 /* UIWebView+UIImage.h */,
+				B966B3571CE5A2F400E03487 /* UIWebView+UIImage.m */,
 			);
 			path = HLPrinter;
 			sourceTree = "<group>";
@@ -248,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B905F8911CD0B2C0003D26CB /* LaunchScreen.storyboard in Resources */,
+				B966B3531CE580E700E03487 /* index.html in Resources */,
 				B905F88E1CD0B2C0003D26CB /* Assets.xcassets in Resources */,
 				B9499D291CDAE3A000542039 /* 2.png in Resources */,
 				B905F88C1CD0B2C0003D26CB /* Main.storyboard in Resources */,
@@ -268,10 +282,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9768BAB1CD848630008C8F3 /* ShoppingViewController.m in Sources */,
+				B966B35E1CE5ACEA00E03487 /* OrderWebController.m in Sources */,
 				B98F219B1CE032AF00E017D4 /* PreviewViewController.m in Sources */,
 				B905F8891CD0B2C0003D26CB /* ViewController.m in Sources */,
 				B905F8861CD0B2C0003D26CB /* AppDelegate.m in Sources */,
 				B9768BB81CD8724A0008C8F3 /* UIImage+Bitmap.m in Sources */,
+				B966B3581CE5A2F400E03487 /* UIWebView+UIImage.m in Sources */,
 				B905F8831CD0B2C0003D26CB /* main.m in Sources */,
 				B905F89B1CD0B325003D26CB /* HLBLEManager.m in Sources */,
 				B9768BBB1CD873820008C8F3 /* HLPrinter.m in Sources */,

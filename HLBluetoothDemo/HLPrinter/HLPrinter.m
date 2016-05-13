@@ -398,7 +398,6 @@
     if (!image) {
         return;
     }
-    
     // 1.设置图片对齐方式
     [self setAlignment:alignment];
     

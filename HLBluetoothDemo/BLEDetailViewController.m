@@ -8,6 +8,7 @@
 
 #import "BLEDetailViewController.h"
 #import "ShoppingViewController.h"
+#import "OrderWebController.h"
 
 #import "SVProgressHUD.h"
 #import "UIImage+Bitmap.h"
@@ -32,7 +33,9 @@
     self.title = @"蓝牙详情";
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"商品" style:UIBarButtonItemStylePlain target:self action:@selector(goToShopping)];
-                                  
+    
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"网络订单" style:UIBarButtonItemStylePlain target:self action:@selector(goToOrder)];
+    
     self.navigationItem.rightBarButtonItem = rightItem;
     
     _infos = [[NSMutableArray alloc] init];
@@ -40,6 +43,18 @@
     
     //连接蓝牙并展示详情
     [self loadBLEInfo];
+}
+
+- (void)goToOrder
+{
+    OrderWebController  *orderVC = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderWebController"];
+    orderVC.printBlock = ^(HLPrinter *printer) {
+        NSData *mainData = [printer getFinalData];
+        
+        HLBLEManager *bleManager = [HLBLEManager sharedInstance];
+        [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
+    };
+    [self.navigationController pushViewController:orderVC animated:YES];
 }
 
 - (void)goToShopping
@@ -53,6 +68,26 @@
         [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
     };
     [self.navigationController pushViewController:shoppingVC animated:YES];
+}
+
+- (NSString *)hexStringFromData:(NSData *)printerData{
+    
+    Byte *bytes = (Byte *)[printerData bytes];
+    
+    NSString *hexStr = @"";
+    for(int i = 0; i < [printerData length]; i++) {
+        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
+        newHexStr = [newHexStr uppercaseString];
+        if([newHexStr length]==1) {
+            hexStr = [NSString stringWithFormat:@"%@ 0%@",hexStr,newHexStr];
+        } else  {
+            hexStr = [NSString stringWithFormat:@"%@ %@",hexStr,newHexStr];
+        }
+    }
+    
+    NSLog(@"%@",hexStr);
+    
+    return hexStr;
 }
 
 #pragma mark - UITableViewDataSource

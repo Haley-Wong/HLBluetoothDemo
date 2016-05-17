@@ -124,6 +124,28 @@
 }
 
 /**
+ *  添加文字，不换行
+ *
+ *  @param text    文字内容
+ *  @param maxChar 最多可以允许多少个字节,后面加...
+ */
+- (void)setText:(NSString *)text maxChar:(int)maxChar
+{
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSData *data = [text dataUsingEncoding:enc];
+    if (data.length > maxChar) {
+        data = [data subdataWithRange:NSMakeRange(0, maxChar)];
+        text = [[NSString alloc] initWithData:data encoding:enc];
+        if (!text) {
+            data = [data subdataWithRange:NSMakeRange(0, maxChar - 1)];
+            text = [[NSString alloc] initWithData:data encoding:enc];
+        }
+        text = [text stringByAppendingString:@"..."];
+    }
+    [self setText:text];
+}
+
+/**
  *  设置偏移文字
  *
  *  @param text 文字
@@ -341,7 +363,7 @@
     }
     
     if (left) {
-        [self setText:left];
+        [self setText:left maxChar:10];
     }
     
     if (middle) {

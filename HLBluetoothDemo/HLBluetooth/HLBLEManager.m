@@ -26,24 +26,29 @@ static HLBLEManager *instance = nil;
 
 + (instancetype)sharedInstance
 {
+    return [[self alloc] init];
+}
+
+- (instancetype)init {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[HLBLEManager alloc] init];
+        instance = [super init];
+        //蓝牙没打开时alert提示框
+        NSDictionary *options = @{CBCentralManagerOptionShowPowerAlertKey:@(YES)};
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue() options:options];
     });
     
     return instance;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        //蓝牙没打开时alert提示框
-        NSDictionary *options = @{CBCentralManagerOptionShowPowerAlertKey:@(YES)};
-        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue() options:options];
-        
-    }
++ (instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [super allocWithZone:zone];
+    });
     
-    return self;
+    return instance;
 }
 
 - (void)scanForPeripheralsWithServiceUUIDs:(NSArray<CBUUID *> *)uuids options:(NSDictionary<NSString *, id> *)options

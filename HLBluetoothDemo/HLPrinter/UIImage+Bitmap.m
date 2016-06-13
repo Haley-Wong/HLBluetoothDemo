@@ -227,11 +227,6 @@
     // 将CIImage转换成UIImage，并放大显示
     UIImage *image =[self createNonInterpolatedUIImageFormCIImage:outputImage withSize:300];
     
-//    CIContext *context = [CIContext contextWithOptions:nil];
-//    CGImageRef imageRef = [context createCGImage:outputImage fromRect:outputImage.extent];
-//    
-//    UIImage *image = [UIImage imageWithCGImage:imageRef];
-    
     return image;
 }
 
@@ -248,15 +243,15 @@
     [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
     CIImage *qrImage = qrFilter.outputImage;
     //颜色滤镜
-    CIFilter *colorFilter = [CIFilter filterWithName:@"CIFalseColor"];
-    [colorFilter setDefaults];
-    [colorFilter setValue:qrImage forKey:kCIInputImageKey];
-    [colorFilter setValue:[CIColor colorWithRed:0 green:0 blue:0] forKey:@"inputColor0"];
-    [colorFilter setValue:[CIColor colorWithRed:0.3 green:0.8 blue:0.2] forKey:@"inputColor1"];
-    CIImage *colorImage = colorFilter.outputImage;
+//    CIFilter *colorFilter = [CIFilter filterWithName:@"CIFalseColor"];
+//    [colorFilter setDefaults];
+//    [colorFilter setValue:qrImage forKey:kCIInputImageKey];
+//    [colorFilter setValue:[CIColor colorWithRed:0 green:0 blue:0] forKey:@"inputColor0"];
+//    [colorFilter setValue:[CIColor colorWithRed:0.3 green:0.8 blue:0.2] forKey:@"inputColor1"];
+//    CIImage *colorImage = colorFilter.outputImage;
     //返回二维码
     CGFloat scale = width/31;
-    UIImage *codeImage = [UIImage imageWithCIImage:[colorImage imageByApplyingTransform:CGAffineTransformMakeScale(scale, scale)]];
+    UIImage *codeImage = [UIImage imageWithCIImage:[qrImage imageByApplyingTransform:CGAffineTransformMakeScale(scale, scale)]];
     
     //二维码rect
     CGRect rect = CGRectMake(0, 0, codeImage.size.width, codeImage.size.height);

@@ -18,6 +18,9 @@
 
 @property (assign, nonatomic)   BOOL             stopScanAfterConnected;  /**< 是否连接成功后停止扫描蓝牙设备 */
 
+@property (assign, nonatomic)   NSInteger         writeCount;   /**< 写入次数 */
+@property (assign, nonatomic)   NSInteger         responseCount; /**< 返回次数 */
+
 @end
 
 static HLBLEManager *instance = nil;
@@ -116,17 +119,30 @@ static HLBLEManager *instance = nil;
 
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type
 {
-    if (data.length > 144) { // 这个144 ,是我用佳博乱码的那个型号测试的，可能别的型号或者别的品牌长度不一样
-        NSLog(@"警告:长度为%lu, 写入的数据过长，可能会导致打印乱码，打印机脱机",data.length);
+    _writeCount = 0;
+    _responseCount = 0;
+    if (data.length <= 146) {
+        [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
+        _writeCount ++;
+    } else {
+        NSInteger index = 0;
+        for (index = 0; index < data.length - 146; index += 146) {
+            NSData *subData = [data subdataWithRange:NSMakeRange(index, 146)];
+            [_connectedPerpheral writeValue:subData forCharacteristic:characteristic type:type];
+            _writeCount++;
+        }
+        NSData *leftData = [data subdataWithRange:NSMakeRange(index, data.length - index)];
+        if (leftData) {
+            [_connectedPerpheral writeValue:leftData forCharacteristic:characteristic type:type];
+            _writeCount++;
+        }
     }
-    [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
+
+//    [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
 }
 
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type completionBlock:(HLWriteToCharacteristicBlock)completionBlock
 {
-    if (data.length > 144) {// 这个144 ,是我用佳博乱码的那个型号测试的，可能别的型号或者别的品牌长度不一样
-        NSLog(@"警告:长度为%lu, 写入的数据过长，可能会导致打印乱码，打印机脱机",data.length);
-    }
     _writeToCharacteristicBlock = completionBlock;
     [self writeValue:data forCharacteristic:characteristic type:type];
 }
@@ -361,9 +377,16 @@ static HLBLEManager *instance = nil;
 #pragma mark ---------------- 写入数据的回调 --------------------
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error
 {
-    if (_writeToCharacteristicBlock) {
-        _writeToCharacteristicBlock(characteristic,error);
+    if (!_writeToCharacteristicBlock) {
+        return;
     }
+    
+    _responseCount ++;
+    if (_writeCount != _responseCount) {
+        return;
+    }
+
+    _writeToCharacteristicBlock(characteristic,error);
 }
 
 #pragma mark ---------------- 获取信号之后的回调 ------------------

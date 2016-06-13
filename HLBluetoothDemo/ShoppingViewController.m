@@ -44,6 +44,7 @@
     NSString *str1 = @"测试电商服务中心(销售单)";
     [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
     [printer appendText:str1 alignment:HLTextAlignmentCenter];
+    [printer appendBarCodeWithInfo:@"123456789012"];
     [printer appendSeperatorLine];
     
     [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
@@ -66,6 +67,8 @@
     [printer appendTitle:@"找零:" value:leftStr];
     
     [printer appendFooter:nil];
+    
+    [printer appendQRCodeWithInfo:@"www.baidu.com"];
     
     return printer;
 }

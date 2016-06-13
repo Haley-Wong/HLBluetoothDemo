@@ -117,6 +117,11 @@
     CBPeripheral *peripherral = dict[@"peripheral"];
     cell.textLabel.text = [NSString stringWithFormat:@"名称:%@",peripherral.name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"信号强度:%@",dict[@"RSSI"]];
+    if (peripherral.state == CBPeripheralStateConnected) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }

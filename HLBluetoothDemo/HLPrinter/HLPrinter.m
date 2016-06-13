@@ -189,6 +189,64 @@
     [_printerData appendBytes:lineSpace length:sizeof(lineSpace)];
 }
 
+/**
+ *  设置二维码模块大小
+ *
+ *  @param size  1<= size <= 16,二维码的宽高相等
+ */
+- (void)setQRCodeSize:(NSInteger)size
+{
+    Byte QRSize [] = {0x1D,0x28,0x6B,0x03,0x00,0x31,0x43,size};
+//    Byte QRSize [] = {29,40,107,3,0,49,67,size};
+    [_printerData appendBytes:QRSize length:sizeof(QRSize)];
+}
+
+/**
+ *  设置二维码的纠错等级
+ *
+ *  @param level 48 <= level <= 51
+ */
+- (void)setQRCodeErrorCorrection:(NSInteger)level
+{
+    Byte levelBytes [] = {0x1D,0x28,0x6B,0x03,0x00,0x31,0x45,level};
+//    Byte levelBytes [] = {29,40,107,3,0,49,69,level};
+    [_printerData appendBytes:levelBytes length:sizeof(levelBytes)];
+}
+
+/**
+ *  将二维码数据存储到符号存储区
+ * [范围]:  4≤(pL+pH×256)≤7092 (0≤pL≤255,0≤pH≤27) 
+ * cn=49  
+ * fn=80  
+ * m=48
+ * k=(pL+pH×256)-3, k就是数据的长度
+ *
+ *  @param info 二维码数据
+ */
+- (void)setQRCodeInfo:(NSString *)info
+{
+    NSInteger kLength = info.length + 3;
+    NSInteger pL = kLength % 256;
+    NSInteger pH = kLength / 256;
+    
+    Byte dataBytes [] = {0x1D,0x28,0x6B,pL,pH,0x31,0x50,48};
+//    Byte dataBytes [] = {29,40,107,pL,pH,49,80,48};
+    [_printerData appendBytes:dataBytes length:sizeof(dataBytes)];
+    NSData *infoData = [info dataUsingEncoding:NSUTF8StringEncoding];
+    [_printerData appendData:infoData];
+//    [self setText:info];
+}
+
+/**
+ *  打印之前存储的二维码信息
+ */
+- (void)printStoredQRData
+{
+    Byte printBytes [] = {0x1D,0x28,0x6B,0x03,0x00,0x31,0x51,48};
+//    Byte printBytes [] = {29,40,107,3,0,49,81,48};
+    [_printerData appendBytes:printBytes length:sizeof(printBytes)];
+}
+
 #pragma mark - ------------function method ----------------
 #pragma mark  文字
 - (void)appendText:(NSString *)text alignment:(HLTextAlignment)alignment
@@ -461,6 +519,24 @@
 {
     UIImage *barImage = [UIImage barCodeImageWithInfo:info];
     [self appendImage:barImage alignment:alignment maxWidth:maxWidth];
+}
+
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size
+{
+    [self setAlignment:HLTextAlignmentCenter];
+    [self setQRCodeSize:size];
+    [self setQRCodeErrorCorrection:48];
+    [self setQRCodeInfo:info];
+    [self printStoredQRData];
+}
+
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment
+{
+    [self setAlignment:alignment];
+    [self setQRCodeSize:size];
+    [self setQRCodeErrorCorrection:48];
+    [self setQRCodeInfo:info];
+    [self printStoredQRData];
 }
 
 - (void)appendQRCodeWithInfo:(NSString *)info

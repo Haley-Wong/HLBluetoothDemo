@@ -193,10 +193,10 @@
 		B9768BB51CD8723E0008C8F3 /* HLPrinter */ = {
 			isa = PBXGroup;
 			children = (
-				B9768BB61CD8724A0008C8F3 /* UIImage+Bitmap.h */,
-				B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */,
 				B9768BB91CD873820008C8F3 /* HLPrinter.h */,
 				B9768BBA1CD873820008C8F3 /* HLPrinter.m */,
+				B9768BB61CD8724A0008C8F3 /* UIImage+Bitmap.h */,
+				B9768BB71CD8724A0008C8F3 /* UIImage+Bitmap.m */,
 				B966B3561CE5A2F400E03487 /* UIWebView+UIImage.h */,
 				B966B3571CE5A2F400E03487 /* UIWebView+UIImage.m */,
 			);

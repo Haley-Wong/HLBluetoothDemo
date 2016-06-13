@@ -107,6 +107,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加图片，一般是添加二维码或者条形码
+ *  ⚠️提醒：这种打印图片的方式，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
  *
  *  @param image     图片
  *  @param alignment 图片对齐方式
@@ -116,6 +117,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加条形码图片
+ *  ⚠️提醒：这种打印条形码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
  *
  *  @param info 条形码中包含的信息，默认居中显示，最大宽度为300。如果大于300,会等比缩放。
  */
@@ -123,6 +125,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加条形码图片
+ *  ⚠️提醒：这种打印条形码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
  *
  *  @param info      条形码中的信息
  *  @param alignment 图片对齐方式
@@ -131,7 +134,27 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 - (void)appendBarCodeWithInfo:(NSString *)info alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth;
 
 /**
+ *  添加二维码
+ *  ✅推荐：这种方式使用的是打印机的指令生成二维码并打印机，所以比较推荐这种方式
+ *
+ *  @param info 二维码中的信息
+ *  @param size 二维码的大小 取值范围1 <= size <= 16
+ */
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size;
+
+/**
+ *  添加二维码
+ *  ✅推荐：这种方式使用的是打印机的指令生成二维码并打印机，所以比较推荐这种方式
+ *
+ *  @param info      二维码中的信息
+ *  @param size      二维码大小，取值范围 1 <= size <= 16
+ *  @param alignment 设置图片对齐方式
+ */
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment;
+
+/**
  *  添加二维码图片
+ *  ⚠️提醒：这种打印条二维码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
  *
  *  @param info 二维码中的信息
  */
@@ -139,6 +162,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加二维码图片
+ *  ⚠️提醒：这种打印条二维码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
  *
  *  @param info        二维码中的信息
  *  @param centerImage 二维码中间的图片

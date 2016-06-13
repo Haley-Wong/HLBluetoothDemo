@@ -8,7 +8,7 @@
 
 #import "ShoppingViewController.h"
 #import "PreviewViewController.h"
-
+#import "HLPrinter.h"
 
 @interface ShoppingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -38,13 +38,12 @@
 
 - (HLPrinter *)getPrinter
 {
-    NSString *title = @"测试电商";
-    NSString *str1 = @"测试电商服务中心(销售单)";
     
     HLPrinter *printer = [[HLPrinter alloc] initWithShowPreview:YES];
+    NSString *title = @"测试电商";
+    NSString *str1 = @"测试电商服务中心(销售单)";
     [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
     [printer appendText:str1 alignment:HLTextAlignmentCenter];
-    [printer appendBarCodeWithInfo:@"RN3456789012"];
     [printer appendSeperatorLine];
     
     [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
@@ -68,19 +67,107 @@
     
     [printer appendFooter:nil];
     
-    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
-    
     return printer;
+}
+
+- (NSArray *)printDataArray
+{
+    NSMutableArray *printInfoArray = [NSMutableArray array];
+    
+    // 你可以多行数据一起写进蓝牙，但是不要过长，否则可能会导致乱码
+    HLPrinter *printer = [[HLPrinter alloc] init];
+    NSString *title = @"测试电商";
+    [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+    NSString *str1 = @"测试电商服务中心(销售单)";
+    [printer appendText:str1 alignment:HLTextAlignmentCenter];
+    NSData *data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendSeperatorLine];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendSeperatorLine];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+ 
+    printer = [[HLPrinter alloc] init];
+    [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    CGFloat total = 0.0;
+    for (NSDictionary *dict in self.goodsArray) {
+        printer = [[HLPrinter alloc] init];
+        [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
+        data1 = [printer getFinalData];
+        [printInfoArray addObject:data1];
+ 
+        total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
+    }
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendSeperatorLine];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
+    [printer appendTitle:@"总计:" value:totalStr];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendTitle:@"实收:" value:@"100.00"];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+
+    
+    printer = [[HLPrinter alloc] init];
+    NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
+    [printer appendTitle:@"找零:" value:leftStr];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendFooter:nil];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendQRCodeWithInfo:@"www.baidu.com" size:12];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+
+    return printInfoArray;
 }
 
 - (void)printAction
 {
     [self.navigationController popViewControllerAnimated:YES];
     
-    HLPrinter *printer = [self getPrinter];
+    NSArray *printInfo = [self printDataArray];
     
     if (_printBlock) {
-        _printBlock(printer);
+        _printBlock(printInfo);
     }
 }
 

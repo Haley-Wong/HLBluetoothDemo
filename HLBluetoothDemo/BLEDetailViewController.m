@@ -51,8 +51,18 @@
     orderVC.printBlock = ^(HLPrinter *printer) {
         NSData *mainData = [printer getFinalData];
         
+#warning 如果打印出来乱码或者打印没反应，可能是您的打印机不支持大量数据写入。重启打印机，然后用其他方式写入数据
         HLBLEManager *bleManager = [HLBLEManager sharedInstance];
-        [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
+        if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse];
+        } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
+            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
+                if (!error) {
+                    NSLog(@"写入成功");
+                }
+            }];
+        }
+
     };
     [self.navigationController pushViewController:orderVC animated:YES];
 }
@@ -60,12 +70,21 @@
 - (void)goToShopping
 {
     ShoppingViewController *shoppingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingViewController"];
-    shoppingVC.printBlock = ^(HLPrinter *printer) {
-        
-        NSData *mainData = [printer getFinalData];
+    shoppingVC.printBlock = ^(NSArray *printArray) {
         
         HLBLEManager *bleManager = [HLBLEManager sharedInstance];
-        [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
+        
+        for (NSData *printData in printArray) {
+            if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+                [bleManager writeValue:printData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse];
+            } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
+                [bleManager writeValue:printData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
+                    if (!error) {
+                        NSLog(@"写入成功");
+                    }
+                }];
+            }
+        }
     };
     [self.navigationController pushViewController:shoppingVC animated:YES];
 }
@@ -114,8 +133,11 @@
     CBService *service = _infos[indexPath.section];
     CBCharacteristic *character = [service.characteristics objectAtIndex:indexPath.row];
     CBCharacteristicProperties properties = character.properties;
-    if (properties & CBCharacteristicPropertyWriteWithoutResponse) {
-        self.chatacter = character;
+    //CBCharacteristicPropertyWrite和CBCharacteristicPropertyWriteWithoutResponse类型的特性都可以写入数据，但是后者不会返回写入结果
+    if (properties & CBCharacteristicPropertyWrite) {
+        if (self.chatacter == nil) {
+            self.chatacter = character;
+        }
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@",character.description];
     
@@ -175,7 +197,7 @@
                              if (error) {
                                  NSLog(@"查找特性的描述失败");
                              } else {
-                                 NSLog(@"查找特性的描述成功");
+//                                 NSLog(@"查找特性的描述成功");
                              }
                              break;
                          }

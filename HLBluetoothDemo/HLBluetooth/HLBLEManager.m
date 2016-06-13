@@ -116,11 +116,17 @@ static HLBLEManager *instance = nil;
 
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type
 {
+    if (data.length > 144) { // 这个144 ,是我用佳博乱码的那个型号测试的，可能别的型号或者别的品牌长度不一样
+        NSLog(@"警告:长度为%lu, 写入的数据过长，可能会导致打印乱码，打印机脱机",data.length);
+    }
     [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
 }
 
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type completionBlock:(HLWriteToCharacteristicBlock)completionBlock
 {
+    if (data.length > 144) {// 这个144 ,是我用佳博乱码的那个型号测试的，可能别的型号或者别的品牌长度不一样
+        NSLog(@"警告:长度为%lu, 写入的数据过长，可能会导致打印乱码，打印机脱机",data.length);
+    }
     _writeToCharacteristicBlock = completionBlock;
     [self writeValue:data forCharacteristic:characteristic type:type];
 }
@@ -166,6 +172,8 @@ static HLBLEManager *instance = nil;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *, id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    NSLog(@"peripheral:%@",peripheral);
+    NSLog(@"advertisementData:%@",advertisementData);
     if (_discoverPeripheralBlcok) {
         _discoverPeripheralBlcok(central, peripheral, advertisementData, RSSI);
     }
@@ -175,6 +183,7 @@ static HLBLEManager *instance = nil;
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     _connectedPerpheral = peripheral;
+   
     
     if (_stopScanAfterConnected) {
         [_centralManager stopScan];
@@ -200,6 +209,11 @@ static HLBLEManager *instance = nil;
     if (_completionBlock) {
         _completionBlock(HLOptionStageConnection,peripheral,nil,nil,error);
     }
+}
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error
+{
+    NSLog(@"断开连接了，断开连接了 %@",error);
 }
 
 #pragma mark ---------------- 发现服务的代理 -----------------
@@ -253,8 +267,11 @@ static HLBLEManager *instance = nil;
         _completionBlock(HLOptionStageSeekCharacteristics,peripheral,service,nil,nil);
     }
     
+    NSLog(@"service:%@",service);
     for (CBCharacteristic *character in service.characteristics) {
+        NSLog(@"character:%@",character);
         [peripheral discoverDescriptorsForCharacteristic:character];
+        [peripheral readValueForCharacteristic:character];
     }
 
 }
@@ -282,7 +299,16 @@ static HLBLEManager *instance = nil;
         return;
     }
     
+    
     NSData *data = characteristic.value;
+    if (data.length > 0) {
+        const unsigned char *hexBytesLight = [data bytes];
+        
+        NSString * battery = [NSString stringWithFormat:@"%02x", hexBytesLight[0]];
+        
+        NSLog(@"batteryInfo:%@",battery);        
+    }
+    
     if (_valueForCharacteristicBlock) {
         _valueForCharacteristicBlock(characteristic,data,nil);
     }

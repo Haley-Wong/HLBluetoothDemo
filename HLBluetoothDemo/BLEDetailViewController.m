@@ -34,62 +34,15 @@
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"商品" style:UIBarButtonItemStylePlain target:self action:@selector(goToShopping)];
     
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"网络订单" style:UIBarButtonItemStylePlain target:self action:@selector(goToOrder)];
+    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithTitle:@"网页" style:UIBarButtonItemStylePlain target:self action:@selector(goToOrder)];
     
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.rightBarButtonItems = @[rightItem,rightItem2];
     
     _infos = [[NSMutableArray alloc] init];
-    _tableView.rowHeight = 60;
+    _tableView.rowHeight = 100;
     
     //连接蓝牙并展示详情
     [self loadBLEInfo];
-}
-
-- (HLPrinter *)getPrinter
-{
-    HLPrinter *printer = [[HLPrinter alloc] initWithShowPreview:YES];
-    NSString *title = @"测试电商";
-    NSString *str1 = @"测试电商服务中心(销售单)";
-    [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
-    [printer appendText:str1 alignment:HLTextAlignmentCenter];
-    [printer appendBarCodeWithInfo:@"RN3456789012"];
-    [printer appendSeperatorLine];
-    
-    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
-    
-    [printer appendSeperatorLine];
-    [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
-    CGFloat total = 0.0;
-    NSDictionary *dict1 = @{@"name":@"铅笔测试一下哈哈",@"amount":@"5",@"price":@"2.0"};
-    NSDictionary *dict2 = @{@"name":@"abcdefghijfdf",@"amount":@"1",@"price":@"1.0"};
-    NSDictionary *dict3 = @{@"name":@"abcde笔记本啊啊",@"amount":@"3",@"price":@"3.0"};
-    NSArray *goodsArray = @[dict1, dict2, dict3];
-    for (NSDictionary *dict in goodsArray) {
-        [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
-        total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
-    }
-    
-    [printer appendSeperatorLine];
-    NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
-    [printer appendTitle:@"总计:" value:totalStr];
-    [printer appendTitle:@"实收:" value:@"100.00"];
-    NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
-    [printer appendTitle:@"找零:" value:leftStr];
-    
-    [printer appendFooter:nil];
-    
-    [printer appendQRCodeWithInfo:@"www.baidu.com"];
-    
-    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
-    
-    // 你也可以利用UIWebView加载HTML小票的方式，这样可以在远程修改小票的样式和布局。
-    // 注意点：需要等UIWebView加载完成后，再截取UIWebView的屏幕快照，然后利用添加图片的方法，加进printer
-    // 截取屏幕快照，可以用UIWebView+UIImage中的catogery方法 - (UIImage *)imageForWebView
-    
-    
-    return printer;
 }
 
 - (void)goToOrder
@@ -97,11 +50,10 @@
     OrderWebController  *orderVC = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderWebController"];
     orderVC.printBlock = ^(HLPrinter *printer) {
         NSData *mainData = [printer getFinalData];
-        
-#warning 如果打印出来乱码或者打印没反应，可能是您的打印机不支持大量数据写入。重启打印机，然后用其他方式写入数据
+
         HLBLEManager *bleManager = [HLBLEManager sharedInstance];
         if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse];
+            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
         } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
             [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
                 if (!error) {
@@ -117,27 +69,12 @@
 - (void)goToShopping
 {
     ShoppingViewController *shoppingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingViewController"];
-    shoppingVC.printBlock = ^(NSArray *printArray) {
+    shoppingVC.printBlock = ^(HLPrinter *printInfo) {
         
-//        HLBLEManager *bleManager = [HLBLEManager sharedInstance];
-//        
-//        for (NSData *printData in printArray) {
-//            if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-//                [bleManager writeValue:printData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse];
-//            } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
-//                [bleManager writeValue:printData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
-//                    if (!error) {
-//                        NSLog(@"写入成功");
-//                    }
-//                }];
-//            }
-//        }
-        HLPrinter *printer = [self getPrinter];
-        
-        NSData *mainData = [printer getFinalData];
+        NSData *mainData = [printInfo getFinalData];
         HLBLEManager *bleManager = [HLBLEManager sharedInstance];
         if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse];
+            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
         } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
             [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
                 if (!error) {
@@ -147,26 +84,6 @@
         }
     };
     [self.navigationController pushViewController:shoppingVC animated:YES];
-}
-
-- (NSString *)hexStringFromData:(NSData *)printerData{
-    
-    Byte *bytes = (Byte *)[printerData bytes];
-    
-    NSString *hexStr = @"";
-    for(int i = 0; i < [printerData length]; i++) {
-        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
-        newHexStr = [newHexStr uppercaseString];
-        if([newHexStr length]==1) {
-            hexStr = [NSString stringWithFormat:@"%@ 0%@",hexStr,newHexStr];
-        } else  {
-            hexStr = [NSString stringWithFormat:@"%@ %@",hexStr,newHexStr];
-        }
-    }
-    
-    NSLog(@"%@",hexStr);
-    
-    return hexStr;
 }
 
 #pragma mark - UITableViewDataSource
@@ -193,13 +110,20 @@
     CBService *service = _infos[indexPath.section];
     CBCharacteristic *character = [service.characteristics objectAtIndex:indexPath.row];
     CBCharacteristicProperties properties = character.properties;
-    //CBCharacteristicPropertyWrite和CBCharacteristicPropertyWriteWithoutResponse类型的特性都可以写入数据，但是后者不会返回写入结果
+    /**
+     CBCharacteristicPropertyWrite和CBCharacteristicPropertyWriteWithoutResponse类型的特性都可以写入数据
+     但是后者写入完成后，不会回调写入完成的代理方法{peripheral:didWriteValueForCharacteristic:error:},
+     因此，你也不会受到block回调。
+     所以首先考虑使用CBCharacteristicPropertyWrite的特性写入数据，如果没有这种特性，再考虑使用后者写入吧。
+     */
+    //
     if (properties & CBCharacteristicPropertyWrite) {
         if (self.chatacter == nil) {
             self.chatacter = character;
         }
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@",character.description];
+    cell.textLabel.numberOfLines = 0;
     
     return cell;
 }
@@ -226,6 +150,7 @@
                                  
                              } else {
                                  [SVProgressHUD showSuccessWithStatus:@"连接成功"];
+                                 
                              }
                              break;
                          }

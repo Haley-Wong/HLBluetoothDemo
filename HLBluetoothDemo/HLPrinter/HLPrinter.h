@@ -33,15 +33,6 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 @interface HLPrinter : NSObject
 
 /**
- *  构造器
- *
- *  @param showPreview 是否需要一个预览视图，预览视图通过@link{-getPreviewView}获取
- *
- *  @return
- */
-- (instancetype)initWithShowPreview:(BOOL)showPreview;
-
-/**
  *  添加单行标题,默认字号是小号字体
  *
  *  @param title     标题名称
@@ -107,7 +98,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加图片，一般是添加二维码或者条形码
- *  ⚠️提醒：这种打印图片的方式，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
+ *  ⚠️提醒：这种打印图片的方式，是自己生成图片，然后用位图打印
  *
  *  @param image     图片
  *  @param alignment 图片对齐方式
@@ -117,7 +108,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加条形码图片
- *  ⚠️提醒：这种打印条形码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
+ *  ⚠️提醒：这种打印条形码的方式，是自己生成条形码图片，然后用位图打印图片
  *
  *  @param info 条形码中包含的信息，默认居中显示，最大宽度为300。如果大于300,会等比缩放。
  */
@@ -125,7 +116,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加条形码图片
- *  ⚠️提醒：这种打印条形码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
+ *  ⚠️提醒：这种打印条形码的方式，是自己生成条形码图片，然后用位图打印图片
  *
  *  @param info      条形码中的信息
  *  @param alignment 图片对齐方式
@@ -154,7 +145,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加二维码图片
- *  ⚠️提醒：这种打印条二维码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
+ *  ⚠️提醒：这种打印条二维码的方式，是自己生成二维码图片，然后用位图打印图片
  *
  *  @param info 二维码中的信息
  */
@@ -162,7 +153,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 /**
  *  添加二维码图片
- *  ⚠️提醒：这种打印条二维码的方式，因为用的是上面打印图片的API，只有少部分型号的打印机支持（主要是因为一次写入的数据太大）
+ *  ⚠️提醒：这种打印条二维码的方式，是自己生成二维码图片，然后用位图打印图片
  *
  *  @param info        二维码中的信息
  *  @param centerImage 二维码中间的图片
@@ -189,8 +180,5 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
  *  @return 最终的data
  */
 - (NSData *)getFinalData;
-
-- (UIView *)getPreviewView;
-
 
 @end

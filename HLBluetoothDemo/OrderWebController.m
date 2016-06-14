@@ -36,8 +36,8 @@
     NSLog(@"rightAction");
     HLPrinter *printer = [[HLPrinter alloc] init];
     UIImage *image = [_webView imageForWebView];
-    [printer appendBarCodeWithInfo:@"RN3456789012"];
-    [printer appendSeperatorLine];
+//    [printer appendBarCodeWithInfo:@"RN3456789012"];
+//    [printer appendSeperatorLine];
     [printer appendImage:image alignment:HLTextAlignmentLeft maxWidth:450];
     
     if (_printBlock) {

@@ -137,8 +137,6 @@ static HLBLEManager *instance = nil;
             _writeCount++;
         }
     }
-
-//    [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
 }
 
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type completionBlock:(HLWriteToCharacteristicBlock)completionBlock
@@ -188,8 +186,6 @@ static HLBLEManager *instance = nil;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *, id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    NSLog(@"peripheral:%@",peripheral);
-    NSLog(@"advertisementData:%@",advertisementData);
     if (_discoverPeripheralBlcok) {
         _discoverPeripheralBlcok(central, peripheral, advertisementData, RSSI);
     }
@@ -283,9 +279,7 @@ static HLBLEManager *instance = nil;
         _completionBlock(HLOptionStageSeekCharacteristics,peripheral,service,nil,nil);
     }
     
-    NSLog(@"service:%@",service);
     for (CBCharacteristic *character in service.characteristics) {
-        NSLog(@"character:%@",character);
         [peripheral discoverDescriptorsForCharacteristic:character];
         [peripheral readValueForCharacteristic:character];
     }
@@ -315,15 +309,15 @@ static HLBLEManager *instance = nil;
         return;
     }
     
-    
+//    
     NSData *data = characteristic.value;
-    if (data.length > 0) {
-        const unsigned char *hexBytesLight = [data bytes];
-        
-        NSString * battery = [NSString stringWithFormat:@"%02x", hexBytesLight[0]];
-        
-        NSLog(@"batteryInfo:%@",battery);        
-    }
+//    if (data.length > 0) {
+//        const unsigned char *hexBytesLight = [data bytes];
+//        
+//        NSString * battery = [NSString stringWithFormat:@"%02x", hexBytesLight[0]];
+//        
+//        NSLog(@"batteryInfo:%@",battery);        
+//    }
     
     if (_valueForCharacteristicBlock) {
         _valueForCharacteristicBlock(characteristic,data,nil);
@@ -385,7 +379,7 @@ static HLBLEManager *instance = nil;
     if (_writeCount != _responseCount) {
         return;
     }
-
+    
     _writeToCharacteristicBlock(characteristic,error);
 }
 

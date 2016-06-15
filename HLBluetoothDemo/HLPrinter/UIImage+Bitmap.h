@@ -83,4 +83,16 @@ typedef NS_ENUM(NSInteger,BitPixels) {
  */
 + (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat)size;
 
+/**
+ *  将原图转变为背景色透明，图片为设置的颜色
+ *
+ *  @param image 要改变的图片
+ *  @param red   red
+ *  @param green green
+ *  @param blue  blue
+ *
+ *  @return 返回修改后的图片
+ */
++ (UIImage*)imageBgColorToTransparentWith:(UIImage*)image withRed:(CGFloat)red andGreen:(CGFloat)green andBlue:(CGFloat)blue;
+
 @end

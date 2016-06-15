@@ -242,16 +242,8 @@
     [qrFilter setValue:strData forKey:@"inputMessage"];
     [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
     CIImage *qrImage = qrFilter.outputImage;
-    //颜色滤镜
-//    CIFilter *colorFilter = [CIFilter filterWithName:@"CIFalseColor"];
-//    [colorFilter setDefaults];
-//    [colorFilter setValue:qrImage forKey:kCIInputImageKey];
-//    [colorFilter setValue:[CIColor colorWithRed:0 green:0 blue:0] forKey:@"inputColor0"];
-//    [colorFilter setValue:[CIColor colorWithRed:0.3 green:0.8 blue:0.2] forKey:@"inputColor1"];
-//    CIImage *colorImage = colorFilter.outputImage;
-    //返回二维码
-    CGFloat scale = width/31;
-    UIImage *codeImage = [UIImage imageWithCIImage:[qrImage imageByApplyingTransform:CGAffineTransformMakeScale(scale, scale)]];
+    
+    UIImage *codeImage = [UIImage createNonInterpolatedUIImageFormCIImage:qrImage withSize:width];
     
     //二维码rect
     CGRect rect = CGRectMake(0, 0, codeImage.size.width, codeImage.size.height);
@@ -292,6 +284,49 @@
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
+}
+
+void ProviderReleaseData (void *info, const void *data, size_t size){
+    free((void*)data);
+}
+
++ (UIImage*)imageBgColorToTransparentWith:(UIImage*)image withRed:(CGFloat)red andGreen:(CGFloat)green andBlue:(CGFloat)blue{
+    const int imageWidth = image.size.width;
+    const int imageHeight = image.size.height;
+    size_t      bytesPerRow = imageWidth * 4;
+    uint32_t* rgbImageBuf = (uint32_t*)malloc(bytesPerRow * imageHeight);
+    // create context
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(rgbImageBuf, imageWidth, imageHeight, 8, bytesPerRow, colorSpace,
+                                                 kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+    CGContextDrawImage(context, CGRectMake(0, 0, imageWidth, imageHeight), image.CGImage);
+    // traverse pixe
+    int pixelNum = imageWidth * imageHeight;
+    uint32_t* pCurPtr = rgbImageBuf;
+    for (int i = 0; i < pixelNum; i++, pCurPtr++){
+        if ((*pCurPtr & 0xFFFFFF00) < 0x99999900){
+            // change color
+            uint8_t* ptr = (uint8_t*)pCurPtr;
+            ptr[3] = red; //0~255
+            ptr[2] = green;
+            ptr[1] = blue;
+        }else{
+            uint8_t* ptr = (uint8_t*)pCurPtr;
+            ptr[0] = 0;
+        }
+    }
+    // context to image
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, rgbImageBuf, bytesPerRow * imageHeight, ProviderReleaseData);
+    CGImageRef imageRef = CGImageCreate(imageWidth, imageHeight, 8, 32, bytesPerRow, colorSpace,
+                                        kCGImageAlphaLast | kCGBitmapByteOrder32Little, dataProvider,
+                                        NULL, true, kCGRenderingIntentDefault);
+    CGDataProviderRelease(dataProvider);
+    UIImage* resultUIImage = [UIImage imageWithCGImage:imageRef];
+    // release
+    CGImageRelease(imageRef);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    return resultUIImage;
 }
 
 @end

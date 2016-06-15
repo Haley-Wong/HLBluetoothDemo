@@ -52,15 +52,16 @@
         NSData *mainData = [printer getFinalData];
 
         HLBLEManager *bleManager = [HLBLEManager sharedInstance];
-        if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
-        } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
+        if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
             [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
                 if (!error) {
                     NSLog(@"写入成功");
                 }
             }];
+        } else if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
         }
+
 
     };
     [self.navigationController pushViewController:orderVC animated:YES];
@@ -73,14 +74,14 @@
         
         NSData *mainData = [printInfo getFinalData];
         HLBLEManager *bleManager = [HLBLEManager sharedInstance];
-        if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
-        } else if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
+        if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
             [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
                 if (!error) {
                     NSLog(@"写入成功");
                 }
             }];
+        } else if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+            [bleManager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
         }
     };
     [self.navigationController pushViewController:shoppingVC animated:YES];
@@ -118,9 +119,10 @@
      */
     //
     if (properties & CBCharacteristicPropertyWrite) {
-        if (self.chatacter == nil) {
-            self.chatacter = character;
-        }
+//        if (self.chatacter == nil) {
+//            self.chatacter = character;
+//        }
+        self.chatacter = character;
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@",character.description];
     cell.textLabel.numberOfLines = 0;

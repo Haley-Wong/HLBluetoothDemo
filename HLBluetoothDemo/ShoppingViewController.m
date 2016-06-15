@@ -63,13 +63,15 @@
     NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
     [printer appendTitle:@"找零:" value:leftStr];
     
-    [printer appendFooter:nil];
-    
+    [printer appendSeperatorLine];
     // 二维码
-//    [printer appendQRCodeWithInfo:@"www.baidu.com"];
+    [printer appendQRCodeWithInfo:@"www.baidu.com"];
+//    [printer appendQRCodeWithInfo:@"www.baidu.com" size:12];
+    [printer appendSeperatorLine];
     
     // 图片
-//    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    [printer appendFooter:nil];
     
     return printer;
 }

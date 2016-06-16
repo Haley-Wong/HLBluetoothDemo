@@ -356,20 +356,20 @@
     [self appendImage:barImage alignment:alignment maxWidth:maxWidth];
 }
 
-//- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size
-//{
-//    [self appendQRCodeWithInfo:info size:size alignment:HLTextAlignmentCenter];
-//}
-//
-//- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment
-//{
-//    [self setAlignment:alignment];
-//    [self setQRCodeSize:size];
-//    [self setQRCodeErrorCorrection:48];
-//    [self setQRCodeInfo:info];
-//    [self printStoredQRData];
-//    [self appendNewLine];
-//}
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size
+{
+    [self appendQRCodeWithInfo:info size:size alignment:HLTextAlignmentCenter];
+}
+
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment
+{
+    [self setAlignment:alignment];
+    [self setQRCodeSize:size];
+    [self setQRCodeErrorCorrection:48];
+    [self setQRCodeInfo:info];
+    [self printStoredQRData];
+    [self appendNewLine];
+}
 
 - (void)appendQRCodeWithInfo:(NSString *)info
 {

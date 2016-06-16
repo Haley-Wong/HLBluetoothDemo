@@ -65,8 +65,12 @@
     
     [printer appendSeperatorLine];
     // 二维码
+    [printer appendText:@"位图方式打印二维码" alignment:HLTextAlignmentCenter];
     [printer appendQRCodeWithInfo:@"www.baidu.com"];
-//    [printer appendQRCodeWithInfo:@"www.baidu.com" size:12];
+    [printer appendSeperatorLine];
+    
+    [printer appendText:@"指令方式打印二维码" alignment:HLTextAlignmentCenter];
+    [printer appendQRCodeWithInfo:@"www.baidu.com" size:12];
     [printer appendSeperatorLine];
     
     // 图片

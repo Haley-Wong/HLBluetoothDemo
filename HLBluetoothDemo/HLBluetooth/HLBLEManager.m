@@ -8,6 +8,9 @@
 
 #import "HLBLEManager.h"
 
+// 发送数据时，需要分段的长度，部分打印机一次发送数据过长就会乱码，需要分段发送。这个长度值不同的打印机可能不一样，你需要调试设置一个合适的值（最好是偶数）
+#define kLimitLength    146
+
 @interface HLBLEManager ()<CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (strong, nonatomic)   CBCentralManager            *centralManager;        /**< 中心管理器 */
@@ -121,13 +124,20 @@ static HLBLEManager *instance = nil;
 {
     _writeCount = 0;
     _responseCount = 0;
-    if (data.length <= 146) {
+    // 如果kLimitLength 小于等于0，则表示不用分段发送
+    if (kLimitLength <= 0) {
+        [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
+        _writeCount ++;
+        return;
+    }
+    
+    if (data.length <= kLimitLength) {
         [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
         _writeCount ++;
     } else {
         NSInteger index = 0;
-        for (index = 0; index < data.length - 146; index += 146) {
-            NSData *subData = [data subdataWithRange:NSMakeRange(index, 146)];
+        for (index = 0; index < data.length - kLimitLength; index += kLimitLength) {
+            NSData *subData = [data subdataWithRange:NSMakeRange(index, kLimitLength)];
             [_connectedPerpheral writeValue:subData forCharacteristic:characteristic type:type];
             _writeCount++;
         }

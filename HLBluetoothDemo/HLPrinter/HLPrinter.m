@@ -162,7 +162,7 @@
 - (void)setLineSpace:(NSInteger)points
 {
     //最后一位，可选 0~255
-    Byte lineSpace[] = {0x1B,0x33,60};
+    Byte lineSpace[] = {0x1B,0x33,points};
     [_printerData appendBytes:lineSpace length:sizeof(lineSpace)];
 }
 

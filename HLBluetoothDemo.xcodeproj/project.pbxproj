@@ -33,6 +33,8 @@
 		B976F85E1CD9F0E900157A87 /* ico180.png in Resources */ = {isa = PBXBuildFile; fileRef = B976F85D1CD9F0E900157A87 /* ico180.png */; };
 		B98F219D1CE04A9400E017D4 /* 04.png in Resources */ = {isa = PBXBuildFile; fileRef = B98F219C1CE04A9400E017D4 /* 04.png */; };
 		B98F219F1CE04BDF00E017D4 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = B98F219E1CE04BDF00E017D4 /* 03.png */; };
+		B9BAB2101D5C1570006DC48E /* tuzhang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9BAB20F1D5C1570006DC48E /* tuzhang.jpg */; };
+		B9BAB2121D5C198D006DC48E /* meitu_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9BAB2111D5C198D006DC48E /* meitu_1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,8 @@
 		B976F85D1CD9F0E900157A87 /* ico180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico180.png; path = ../ico180.png; sourceTree = "<group>"; };
 		B98F219C1CE04A9400E017D4 /* 04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04.png; sourceTree = "<group>"; };
 		B98F219E1CE04BDF00E017D4 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
+		B9BAB20F1D5C1570006DC48E /* tuzhang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tuzhang.jpg; sourceTree = "<group>"; };
+		B9BAB2111D5C198D006DC48E /* meitu_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meitu_1.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				B976F85D1CD9F0E900157A87 /* ico180.png */,
+				B9BAB20F1D5C1570006DC48E /* tuzhang.jpg */,
+				B9BAB2111D5C198D006DC48E /* meitu_1.jpg */,
 				B9499D241CDAE3A000542039 /* 1.png */,
 				B9499D251CDAE3A000542039 /* 2.png */,
 				B98F219E1CE04BDF00E017D4 /* 03.png */,
@@ -258,9 +264,11 @@
 				B905F8911CD0B2C0003D26CB /* LaunchScreen.storyboard in Resources */,
 				B966B3531CE580E700E03487 /* index.html in Resources */,
 				B905F88E1CD0B2C0003D26CB /* Assets.xcassets in Resources */,
+				B9BAB2101D5C1570006DC48E /* tuzhang.jpg in Resources */,
 				B9499D291CDAE3A000542039 /* 2.png in Resources */,
 				B905F88C1CD0B2C0003D26CB /* Main.storyboard in Resources */,
 				B98F219D1CE04A9400E017D4 /* 04.png in Resources */,
+				B9BAB2121D5C198D006DC48E /* meitu_1.jpg in Resources */,
 				B98F219F1CE04BDF00E017D4 /* 03.png in Resources */,
 				B9499D281CDAE3A000542039 /* 1.png in Resources */,
 				B964B2371CD35E62004BE213 /* SVProgressHUD.bundle in Resources */,

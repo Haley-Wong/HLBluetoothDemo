@@ -1,5 +1,11 @@
 # HLBluetoothDemo
 
+# 提醒
+有部分开发人员，加群之后，直接问设备扫描不到，服务扫描出错，特性扫描报错，怎么办？
+对于这类问题，要严厉批评，都是因为懒，没有用心去看官方文档或者关于CoreBluetooth的教程。<br>
+所以对于蓝牙的连接处理流程不清晰的，严重建议先看[iOS CoreBluetooth 的使用讲解](http://www.jianshu.com/p/1f479b6ab6df)<br>
+自己动手写Demo，把系统的CoreBluetooth的使用，以及蓝牙的流程搞懂了，再开始做蓝牙打印的功能。
+
 # 引言
 该项目中包含两个部分的工具类`HLBluetooth` 和`HLPrinter`,蓝牙操作和打印小票功能。<br>
 

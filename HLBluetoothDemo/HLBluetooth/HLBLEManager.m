@@ -235,6 +235,8 @@ static HLBLEManager *instance = nil;
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error
 {
+    _connectedPerpheral = nil;
+    
     NSLog(@"断开连接了，断开连接了 %@",error);
 }
 

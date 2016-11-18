@@ -26,6 +26,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>蓝牙打印机功能需要您开启蓝牙，并允许该应用使用。</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

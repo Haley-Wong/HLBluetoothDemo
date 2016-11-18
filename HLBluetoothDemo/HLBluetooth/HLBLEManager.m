@@ -42,6 +42,7 @@ static HLBLEManager *instance = nil;
         //蓝牙没打开时alert提示框
         NSDictionary *options = @{CBCentralManagerOptionShowPowerAlertKey:@(YES)};
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue() options:options];
+        _limitLength = kLimitLength;
     });
     
     return instance;
@@ -124,20 +125,25 @@ static HLBLEManager *instance = nil;
 {
     _writeCount = 0;
     _responseCount = 0;
-    // 如果kLimitLength 小于等于0，则表示不用分段发送
-    if (kLimitLength <= 0) {
+    // iOS 9 以后，系统添加了这个API来获取特性能写入的最大长度
+    if ([_connectedPerpheral respondsToSelector:@selector(maximumWriteValueLengthForType:)]) {
+        _limitLength = [_connectedPerpheral maximumWriteValueLengthForType:type];
+    }
+    
+    // 如果_limitLength 小于等于0，则表示不用分段发送
+    if (_limitLength <= 0) {
         [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
         _writeCount ++;
         return;
     }
     
-    if (data.length <= kLimitLength) {
+    if (data.length <= _limitLength) {
         [_connectedPerpheral writeValue:data forCharacteristic:characteristic type:type];
         _writeCount ++;
     } else {
         NSInteger index = 0;
-        for (index = 0; index < data.length - kLimitLength; index += kLimitLength) {
-            NSData *subData = [data subdataWithRange:NSMakeRange(index, kLimitLength)];
+        for (index = 0; index < data.length - _limitLength; index += _limitLength) {
+            NSData *subData = [data subdataWithRange:NSMakeRange(index, _limitLength)];
             [_connectedPerpheral writeValue:subData forCharacteristic:characteristic type:type];
             _writeCount++;
         }

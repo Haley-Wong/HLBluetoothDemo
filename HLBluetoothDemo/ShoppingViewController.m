@@ -76,7 +76,6 @@
     // 图片
     [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
     [printer appendFooter:nil];
-    
     return printer;
 }
 

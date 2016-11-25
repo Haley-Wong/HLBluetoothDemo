@@ -175,6 +175,13 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 - (void)appendFooter:(NSString *)footerInfo;
 
 /**
+ 添加自定义的data
+
+ @param data 自定义的data
+ */
+- (void)appendCustomData:(NSData *)data;
+
+/**
  *  获取最终的data
  *
  *  @return 最终的data

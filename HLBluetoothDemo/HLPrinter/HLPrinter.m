@@ -382,6 +382,19 @@
     [self appendImage:QRImage alignment:alignment maxWidth:maxWidth];
 }
 
+/**
+ 添加自定义的data
+ 
+ @param data 自定义的data
+ */
+- (void)appendCustomData:(NSData *)data
+{
+    if (data.length <= 0) {
+        return;
+    }
+    [_printerData appendData:data];
+}
+
 #pragma mark 其他
 - (void)appendSeperatorLine
 {

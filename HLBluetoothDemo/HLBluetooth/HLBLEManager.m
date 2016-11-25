@@ -101,6 +101,7 @@ static HLBLEManager *instance = nil;
 - (void)stopScan
 {
     [_centralManager stopScan];
+    _discoverPeripheralBlcok = nil;
 }
 
 - (void)cancelPeripheralConnection
